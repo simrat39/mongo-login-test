@@ -24,7 +24,7 @@ registerForm.addEventListener("submit", async (e) => {
   if (responseJson.status == 'success') {
       console.log("Registered Succesfully")
   } else {
-      console.log(responseJson.msg)
+      console.error(responseJson.msg)
   }
 });
 
@@ -51,5 +51,7 @@ loginForm.addEventListener("submit", async (e) => {
 
   if (responseJson.status == 'success') {
       window.location.href = '/profile'
+  } else {
+      console.error(responseJson.msg)
   }
 });
