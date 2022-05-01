@@ -29,7 +29,7 @@ async function main() {
     res.send(doc);
   });
 
-  app.get("/profile", async (_, res) => {
+  app.get("/profile", async (req, res) => {
     if (!req.session.loggedIn) {
       res.redirect("/");
       return;
@@ -97,6 +97,16 @@ async function main() {
     } else {
       const user = await User.findOne({ _id: req.session.userID });
       res.json({ status: "success", data: { name: user.name } });
+    }
+  });
+
+  app.get("/logout", async (req, res) => {
+    if (req.session) {
+      req.session.destroy(() => {
+        res.json({ status: "success" });
+      });
+    } else {
+      res.json({ status: "fail", msg: "No existing session!" });
     }
   });
 }
