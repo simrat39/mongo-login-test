@@ -78,6 +78,16 @@ async function main() {
       res.json({ status: "success" });
     }
   });
+
+  app.get("/getUserData", async (req, res) => {
+    if (!req.session.loggedIn) {
+      res.json({ status: "fail", msg: "Not logged in!" });
+      return;
+    } else {
+      const user = await User.findOne({ _id: req.session.userID });
+      res.json({ status: "success", data: { name: user.name } });
+    }
+  });
 }
 
 app.listen(8000, main);
