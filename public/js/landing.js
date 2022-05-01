@@ -1,6 +1,6 @@
-const form = document.getElementById("register");
+const registerForm = document.getElementById("register");
 
-form.addEventListener("submit", async (e) => {
+registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const emailNode = document.getElementById("register-email");
   const passwordNode = document.getElementById("register-password");
@@ -18,4 +18,32 @@ form.addEventListener("submit", async (e) => {
       name: nameNode.value,
     }),
   });
+
+});
+
+
+const loginForm = document.getElementById("login");
+
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const emailNode = document.getElementById("login-email");
+  const passwordNode = document.getElementById("login-password");
+
+  const res = await fetch("/login", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: emailNode.value,
+      password: passwordNode.value,
+    }),
+  });
+  const responseJson = await res.json()
+  console.log(responseJson)
+
+  if (responseJson.status == 'success') {
+      window.location.href = '/profile'
+  }
 });

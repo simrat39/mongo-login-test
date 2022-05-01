@@ -8,16 +8,42 @@
   </head>
   <body>
     <form id="register">
-      <label for="register-name">Name: </label>
-      <input type="text" name="register-name" id="register-name">
+      <fieldset>
+        <legend>Register:</legend>
 
-      <label for="register-email">Email: </label>
-      <input type="email" name="register-email" id="register-email">
+        <label for="register-name">Name: </label>
+        <input type="text" name="register-name" id="register-name" />
 
-      <label for="register-password">Password: </label>
-      <input type="password" name="register-password" id="register-password">
+        <label for="register-email">Email: </label>
+        <input type="email" name="register-email" id="register-email" />
 
-      <input type="submit" value="Register">
+        <label for="register-password">Password: </label>
+        <input
+          type="password"
+          name="register-password"
+          id="register-password"
+        />
+
+        <input type="submit" value="Register" />
+      </fieldset>
+    </form>
+
+    <form id="login">
+      <fieldset>
+        <legend>Login:</legend>
+
+        <label for="login-email">Email: </label>
+        <input type="email" name="login-email" id="login-email" />
+
+        <label for="login-password">Password: </label>
+        <input
+          type="password"
+          name="login-password"
+          id="login-password"
+        />
+
+        <input type="submit" value="Login" />
+      </fieldset>
     </form>
     <script type="module" src="/js/landing.js"></script>
   </body>
