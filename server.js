@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const fs = require("fs");
 const sessions = require("express-session");
 const User = require("./schemas/User.js");
+const req = require("express/lib/request");
 
 async function main() {
   mongoose.connect("mongodb://127.0.0.1:27017/tutorria");
@@ -18,12 +19,22 @@ async function main() {
     sessions({ secret: "tisasecret", saveUninitialized: true, resave: false })
   );
 
-  app.get("/", async (_, res) => {
+  app.get("/", async (req, res) => {
+    if (req.session.loggedIn) {
+      res.redirect("/profile");
+      return;
+    }
+
     const doc = fs.readFileSync("./public/html/landing.html", "utf-8");
     res.send(doc);
   });
 
   app.get("/profile", async (_, res) => {
+    if (!req.session.loggedIn) {
+      res.redirect("/");
+      return;
+    }
+
     const doc = fs.readFileSync("./public/html/profile.html", "utf-8");
     res.send(doc);
   });
